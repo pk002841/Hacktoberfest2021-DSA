@@ -1,0 +1,15 @@
+class Solution {
+public:
+   int longestConsecutive(vector<int>& nums) {
+        unordered_set<int> q(nums.begin(), nums.end());
+        int res = 0;
+        while (!q.empty()) {
+            int cur = *q.begin(); q.erase(cur); 
+            int l = cur - 1, r = cur + 1;
+            while (q.count(l)) q.erase(l--);
+            while (q.count(r)) q.erase(r++);
+            res = max(res, r - l - 1);
+        }
+        return res;
+    }
+};
